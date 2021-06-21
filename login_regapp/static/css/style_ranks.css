@@ -1,0 +1,8 @@
+body {
+    counter-reset: section;
+}
+
+#rank {
+    counter-increment: section;
+    content: "Section " counter(section) ": ";
+}

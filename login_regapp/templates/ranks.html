@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
+    <title>Ranks</title>
+</head>
+<body>
+    <form action="/rank_region" method="post"  >
+        {% csrf_token %}
+        <ul><label for="l_region"><title></title> Search by region </label></ul>
+        <ul><input type="text" name="l_region" id="l_region"></ul>              
+        <ul><input type="submit" value="See ranks"></ul>
+    </form>  
+        <form action="/pass" method="post">
+            {% csrf_token %}        
+            <input type="submit" name="go back" value="go back">       
+        </form>
+        
+        <h1>This ranked is from {{searched_region}}</h1>
+        
+     
+   
+        {%for players in ranks%}
+        
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Elo</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Last name</th>                        
+                        <th scope="col">Duel</th>                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr> 
+                        <th scope="row">{{  players.elo }}</th>                      
+                        
+                        <td>{{  players.first_name }}</td>
+                        <td>{{  players.last_name }}</td>
+                        <td><a href="duel/{{duel.id}}" class="btn btn-dark">Duel</a></td> 
+                       
+
+                    </tr>
+                    
+                    </tbody>
+                </table>
+                    
+                </tbody>
+    {% endfor %}  
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Duel page</title>
+</head>
+<body>
+    <h1>Please input the results</h1>    
+    <form action="/duel_elo" method="post" class="nav justify-content-center" >
+        {% csrf_token %}
+        <ul><label for="score_player"><title></title><h1>{{ player.first_name}}</h1> </label></ul>
+        <ul><input type="text"  name="score_player" id="score_player"></ul> 
+        <ul><input type="hidden" name="player_id" value="{{ player.id}}" ></ul> 
+        <ul><label for="score_opponnet"><title></title><h1>{{opponnet.first_name}}</h1> </label></ul>
+        <ul><input type="text" name="score_opponnet" id="score_opponnet"></ul>   
+        <ul><input type="hidden" name="opponnet_id" value="{{ opponnet.id}}" ></ul>   
+        <ul><input type="submit" class="btn btn-danger" value="Submit Score"></ul>
+    </form>        
+        
+            
+            <form action="/pass" method="post" class="nav justify-content-center">
+                {% csrf_token %}        
+                <input type="submit" class="btn btn-info" name="go back" value="go back">       
+            </form>
+</body>
+</html>

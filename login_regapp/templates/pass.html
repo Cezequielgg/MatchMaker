@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>MainPage</title>
+</head>
+<body>   
+    {% if identifier.image %}
+    <img src="{{ identifier.image.url }}">
+    {% endif %} 
+    <h1>Hello {{ post.img_obj.url }}  {{request.session.name}} {{request.session.image.url}} </h1>
+    <img src="{{ post.image.url }}">
+    <h3>Your Elo is = {{ identifier.elo}}</h3>
+    <h3>region = {{ identifier.region}}</h3>
+    
+
+    <form action="/rank_region" method="post"  >
+        {% csrf_token %}
+        <ul><label for="l_region"><title></title> Region </label></ul>
+        <ul><input type="text" name="l_region" id="l_region"></ul>              
+        <ul><input type="submit" class="btn btn-dark" value="See ranks"></ul>
+    </form>
+    
+    
+    
+    
+    {%for duel in tobeduel%}
+                <tbody>
+                    <tr>                       
+                        
+                        <!-- <th scope="row">{{request.session.name}} </th> -->
+                        {%if request.session.name != duel.first_name %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Elo</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">region</th>                        
+                                <th scope="col">duel</th>                        
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr> 
+                                <th scope="row">{{  duel.elo }}</th>                       
+                                <td>{{  duel.first_name }}</td>   
+                                <td>{{  duel.region }}</td>                                 
+                                <td><a href="duel/{{duel.id}}" class="btn btn-dark">Duel</a></td>  
+                               
+        
+                            </tr>
+                            
+                            </tbody>
+                        </table>                      
+                        
+                        {% endif %}                              
+                    </tr>                
+                </tbody>
+    {% endfor %}  
+    
+     
+    <form action="/logout" method="post">
+        {% csrf_token %}        
+        <input type="submit" name="logout" class="btn btn-dark" value="logout">       
+    </form>
+    
+</body>
+</html>
